@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using AtmProject.Models;
+using Register.Models;
 
-namespace AtmProject.Data
+namespace Register.Data
 {
     public class JsonAccountRepository : IAccountRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using AtmProject.Models;
+using Register.Models;
 
-namespace AtmProject.Data
+namespace Register.Data
 {
     public interface IAccountRepository
     {
