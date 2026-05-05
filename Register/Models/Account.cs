@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AtmProject.Models
+namespace Register.Models
 {
     public class Account
     {
