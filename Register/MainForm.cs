@@ -20,6 +20,7 @@ namespace Register
             _repository = new JsonAccountRepository("accounts.json");
             _atm = new AutomatedTellerMachine(_repository);
 
+            _atm.OnWithdrawResult += HandleWithdrawResult;
             _atm.OnAuthenticationResult += HandleAuthResult;
             _atm.OnBalanceRequested += HandleBalanceRequested;
             _atm.OnTransferResult += HandleTransferResult;
@@ -114,6 +115,45 @@ namespace Register
                 {
                     lstTransactions.Items.Add(account.Transactions[i].ToString());
                 }
+            }
+        }
+        private void HandleWithdrawResult(bool isSuccess, string message)
+        {
+            if (isSuccess)
+            {
+                MessageBox.Show(message, "Заберіть гроші", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _atm.RequestBalance(); 
+                LoadTransactionHistory(); 
+                txtWithdrawAmount.Clear();
+                chkSmallBills.Checked = false;
+            }
+            else
+            {
+                MessageBox.Show(message, "Помилка видачі", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtWithdrawAmount.Text, out decimal amount))
+            {
+             
+                IDispenseStrategy strategy;
+
+                if (chkSmallBills.Checked)
+                {
+                    strategy = new SmallBillsDispenseStrategy();
+                }
+                else
+                {
+                    strategy = new DefaultDispenseStrategy();
+                }
+
+                _atm.WithdrawFunds(amount, strategy);
+            }
+            else
+            {
+                MessageBox.Show("Введіть коректну суму!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

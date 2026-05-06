@@ -35,6 +35,10 @@
             txtPin = new TextBox();
             txtCardNumber = new TextBox();
             pnlOperations = new Panel();
+            btnWithdraw = new Button();
+            label5 = new Label();
+            chkSmallBills = new CheckBox();
+            txtWithdrawAmount = new TextBox();
             btnUpdateHistory = new Button();
             lstTransactions = new ListBox();
             label4 = new Label();
@@ -106,6 +110,10 @@
             // 
             // pnlOperations
             // 
+            pnlOperations.Controls.Add(btnWithdraw);
+            pnlOperations.Controls.Add(label5);
+            pnlOperations.Controls.Add(chkSmallBills);
+            pnlOperations.Controls.Add(txtWithdrawAmount);
             pnlOperations.Controls.Add(btnUpdateHistory);
             pnlOperations.Controls.Add(lstTransactions);
             pnlOperations.Controls.Add(label4);
@@ -116,15 +124,51 @@
             pnlOperations.Controls.Add(btnCheckBalance);
             pnlOperations.Controls.Add(txtAmount);
             pnlOperations.Controls.Add(txtTargetCard);
-            pnlOperations.Location = new Point(298, 45);
+            pnlOperations.Location = new Point(240, 52);
             pnlOperations.Name = "pnlOperations";
-            pnlOperations.Size = new Size(384, 368);
+            pnlOperations.Size = new Size(450, 368);
             pnlOperations.TabIndex = 3;
             pnlOperations.Visible = false;
             // 
+            // btnWithdraw
+            // 
+            btnWithdraw.Location = new Point(41, 297);
+            btnWithdraw.Name = "btnWithdraw";
+            btnWithdraw.Size = new Size(125, 23);
+            btnWithdraw.TabIndex = 15;
+            btnWithdraw.Text = "Зняти готівку";
+            btnWithdraw.UseVisualStyleBackColor = true;
+            btnWithdraw.Click += btnWithdraw_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(21, 250);
+            label5.Name = "label5";
+            label5.Size = new Size(73, 15);
+            label5.TabIndex = 14;
+            label5.Text = "Сума зняття";
+            // 
+            // chkSmallBills
+            // 
+            chkSmallBills.AutoSize = true;
+            chkSmallBills.Location = new Point(199, 270);
+            chkSmallBills.Name = "chkSmallBills";
+            chkSmallBills.Size = new Size(120, 19);
+            chkSmallBills.TabIndex = 13;
+            chkSmallBills.Text = "Видати дрібними";
+            chkSmallBills.UseVisualStyleBackColor = true;
+            // 
+            // txtWithdrawAmount
+            // 
+            txtWithdrawAmount.Location = new Point(21, 268);
+            txtWithdrawAmount.Name = "txtWithdrawAmount";
+            txtWithdrawAmount.Size = new Size(153, 23);
+            txtWithdrawAmount.TabIndex = 12;
+            // 
             // btnUpdateHistory
             // 
-            btnUpdateHistory.Location = new Point(212, 137);
+            btnUpdateHistory.Location = new Point(233, 140);
             btnUpdateHistory.Name = "btnUpdateHistory";
             btnUpdateHistory.Size = new Size(123, 26);
             btnUpdateHistory.TabIndex = 11;
@@ -138,7 +182,7 @@
             lstTransactions.ItemHeight = 15;
             lstTransactions.Location = new Point(212, 37);
             lstTransactions.Name = "lstTransactions";
-            lstTransactions.Size = new Size(120, 94);
+            lstTransactions.Size = new Size(212, 94);
             lstTransactions.TabIndex = 10;
             // 
             // label4
@@ -146,22 +190,22 @@
             label4.AutoSize = true;
             label4.Location = new Point(26, 77);
             label4.Name = "label4";
-            label4.Size = new Size(114, 15);
+            label4.Size = new Size(90, 15);
             label4.TabIndex = 9;
-            label4.Text = "Номер отримувача";
+            label4.Text = "Сума переводу";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(26, 26);
             label3.Name = "label3";
-            label3.Size = new Size(79, 15);
+            label3.Size = new Size(148, 15);
             label3.TabIndex = 8;
-            label3.Text = "Номер карти";
+            label3.Text = "Номер карти отримувача";
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(96, 199);
+            btnLogout.Location = new Point(76, 202);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(75, 23);
             btnLogout.TabIndex = 5;
@@ -171,7 +215,7 @@
             // 
             // btnTransfer
             // 
-            btnTransfer.Location = new Point(142, 170);
+            btnTransfer.Location = new Point(122, 173);
             btnTransfer.Name = "btnTransfer";
             btnTransfer.Size = new Size(75, 23);
             btnTransfer.TabIndex = 4;
@@ -182,7 +226,7 @@
             // lblBalance
             // 
             lblBalance.AutoSize = true;
-            lblBalance.Location = new Point(118, 134);
+            lblBalance.Location = new Point(41, 140);
             lblBalance.Name = "lblBalance";
             lblBalance.Size = new Size(38, 15);
             lblBalance.TabIndex = 3;
@@ -190,7 +234,7 @@
             // 
             // btnCheckBalance
             // 
-            btnCheckBalance.Location = new Point(61, 170);
+            btnCheckBalance.Location = new Point(41, 173);
             btnCheckBalance.Name = "btnCheckBalance";
             btnCheckBalance.Size = new Size(75, 23);
             btnCheckBalance.TabIndex = 2;
@@ -248,5 +292,9 @@
         private Label label3;
         private Button btnUpdateHistory;
         private ListBox lstTransactions;
+        private Button btnWithdraw;
+        private Label label5;
+        private CheckBox chkSmallBills;
+        private TextBox txtWithdrawAmount;
     }
 }
