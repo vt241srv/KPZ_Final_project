@@ -10,6 +10,6 @@ namespace Register.Models
         public string OwnerName { get; set; }
 
 
-        public List<string> TransactionHistory { get; set; } = new List<string>();
+        public List<TransactionDetails> Transactions { get; set; } = new List<TransactionDetails>();
     }
 }
