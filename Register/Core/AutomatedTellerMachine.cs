@@ -12,10 +12,13 @@ namespace Register.Core
         public delegate void AuthenticationHandler(bool isSuccess, string message);
         public delegate void BalanceCheckHandler(decimal balance);
         public delegate void FundTransferHandler(bool isSuccess, string message);
+        public delegate void WithdrawHandler(bool isSuccess, string message);
+
 
         public event AuthenticationHandler OnAuthenticationResult;
         public event BalanceCheckHandler OnBalanceRequested;
         public event FundTransferHandler OnTransferResult;
+        public event WithdrawHandler OnWithdrawResult;
 
         public AutomatedTellerMachine(IAccountRepository repository)
         {
@@ -96,6 +99,42 @@ namespace Register.Core
             _repository.UpdateAccount(targetAccount);
 
             OnTransferResult?.Invoke(true, $"Успішно переказано {amount} грн на картку {targetCardNumber}.");
+        }
+        public void WithdrawFunds(decimal amount, IDispenseStrategy strategy)
+        {
+            if (_currentAccount == null) return;
+
+            if (amount <= 0 || amount % 50 != 0)
+            {
+                OnWithdrawResult?.Invoke(false, "Помилка: Сума має бути кратною 50.");
+                return;
+            }
+
+            if (_currentAccount.Balance < amount)
+            {
+                OnWithdrawResult?.Invoke(false, "Недостатньо коштів на рахунку.");
+                return;
+            }
+
+            string dispenseResult = strategy.Dispense(amount);
+
+            if (dispenseResult.Contains("Неможливо"))
+            {
+                OnWithdrawResult?.Invoke(false, dispenseResult);
+                return;
+            }
+
+            _currentAccount.Balance -= amount;
+            _currentAccount.Transactions.Add(new Models.TransactionDetails
+            {
+                Date = DateTime.Now,
+                Type = "Зняття",
+                Amount = -amount,
+                Description = "Готівка у банкоматі"
+            });
+
+            _repository.UpdateAccount(_currentAccount);
+            OnWithdrawResult?.Invoke(true, $"{dispenseResult}\nЗалишок: {_currentAccount.Balance} грн");
         }
     }
 }
