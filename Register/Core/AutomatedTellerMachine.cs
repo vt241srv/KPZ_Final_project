@@ -76,6 +76,22 @@ namespace Register.Core
             _currentAccount.Balance -= amount;
             targetAccount.Balance += amount;
 
+            _currentAccount.Transactions.Add(new TransactionDetails
+            {
+                Date = DateTime.Now,
+                Type = "Переказ",
+                Amount = -amount,
+                Description = $"На картку {targetCardNumber}"
+            });
+
+            targetAccount.Transactions.Add(new TransactionDetails
+            {
+                Date = DateTime.Now,
+                Type = "Поповнення",
+                Amount = amount,
+                Description = $"Від {_currentAccount.CardNumber}"
+            });
+
             _repository.UpdateAccount(_currentAccount);
             _repository.UpdateAccount(targetAccount);
 

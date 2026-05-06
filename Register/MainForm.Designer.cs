@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             pnlLogin = new Panel();
+            label2 = new Label();
+            label1 = new Label();
             btnLogin = new Button();
             txtPin = new TextBox();
             txtCardNumber = new TextBox();
             pnlOperations = new Panel();
+            btnUpdateHistory = new Button();
+            lstTransactions = new ListBox();
+            label4 = new Label();
+            label3 = new Label();
             btnLogout = new Button();
             btnTransfer = new Button();
             lblBalance = new Label();
@@ -45,13 +51,33 @@
             // 
             // pnlLogin
             // 
+            pnlLogin.Controls.Add(label2);
+            pnlLogin.Controls.Add(label1);
             pnlLogin.Controls.Add(btnLogin);
             pnlLogin.Controls.Add(txtPin);
             pnlLogin.Controls.Add(txtCardNumber);
-            pnlLogin.Location = new Point(33, 28);
+            pnlLogin.Location = new Point(56, 74);
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(150, 156);
             pnlLogin.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(3, 54);
+            label2.Name = "label2";
+            label2.Size = new Size(48, 15);
+            label2.TabIndex = 7;
+            label2.Text = "PIN код";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 8);
+            label1.Name = "label1";
+            label1.Size = new Size(79, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Номер карти";
             // 
             // btnLogin
             // 
@@ -59,7 +85,7 @@
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(75, 23);
             btnLogin.TabIndex = 2;
-            btnLogin.Text = "button1";
+            btnLogin.Text = "Вхід";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
@@ -80,42 +106,83 @@
             // 
             // pnlOperations
             // 
+            pnlOperations.Controls.Add(btnUpdateHistory);
+            pnlOperations.Controls.Add(lstTransactions);
+            pnlOperations.Controls.Add(label4);
+            pnlOperations.Controls.Add(label3);
             pnlOperations.Controls.Add(btnLogout);
             pnlOperations.Controls.Add(btnTransfer);
             pnlOperations.Controls.Add(lblBalance);
             pnlOperations.Controls.Add(btnCheckBalance);
             pnlOperations.Controls.Add(txtAmount);
             pnlOperations.Controls.Add(txtTargetCard);
-            pnlOperations.Location = new Point(232, 28);
+            pnlOperations.Location = new Point(298, 45);
             pnlOperations.Name = "pnlOperations";
-            pnlOperations.Size = new Size(198, 183);
+            pnlOperations.Size = new Size(384, 368);
             pnlOperations.TabIndex = 3;
             pnlOperations.Visible = false;
             // 
+            // btnUpdateHistory
+            // 
+            btnUpdateHistory.Location = new Point(212, 137);
+            btnUpdateHistory.Name = "btnUpdateHistory";
+            btnUpdateHistory.Size = new Size(123, 26);
+            btnUpdateHistory.TabIndex = 11;
+            btnUpdateHistory.Text = "Оновити історію";
+            btnUpdateHistory.UseVisualStyleBackColor = true;
+            btnUpdateHistory.Click += btnUpdateHistory_Click;
+            // 
+            // lstTransactions
+            // 
+            lstTransactions.FormattingEnabled = true;
+            lstTransactions.ItemHeight = 15;
+            lstTransactions.Location = new Point(212, 37);
+            lstTransactions.Name = "lstTransactions";
+            lstTransactions.Size = new Size(120, 94);
+            lstTransactions.TabIndex = 10;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(26, 77);
+            label4.Name = "label4";
+            label4.Size = new Size(114, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Номер отримувача";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(26, 26);
+            label3.Name = "label3";
+            label3.Size = new Size(79, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Номер карти";
+            // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(59, 140);
+            btnLogout.Location = new Point(96, 199);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(75, 23);
             btnLogout.TabIndex = 5;
-            btnLogout.Text = "button1";
+            btnLogout.Text = "Вихід";
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
             // btnTransfer
             // 
-            btnTransfer.Location = new Point(105, 111);
+            btnTransfer.Location = new Point(142, 170);
             btnTransfer.Name = "btnTransfer";
             btnTransfer.Size = new Size(75, 23);
             btnTransfer.TabIndex = 4;
-            btnTransfer.Text = "button1";
+            btnTransfer.Text = "Переказати";
             btnTransfer.UseVisualStyleBackColor = true;
             btnTransfer.Click += btnTransfer_Click;
             // 
             // lblBalance
             // 
             lblBalance.AutoSize = true;
-            lblBalance.Location = new Point(37, 51);
+            lblBalance.Location = new Point(118, 134);
             lblBalance.Name = "lblBalance";
             lblBalance.Size = new Size(38, 15);
             lblBalance.TabIndex = 3;
@@ -123,27 +190,26 @@
             // 
             // btnCheckBalance
             // 
-            btnCheckBalance.Location = new Point(24, 111);
+            btnCheckBalance.Location = new Point(61, 170);
             btnCheckBalance.Name = "btnCheckBalance";
             btnCheckBalance.Size = new Size(75, 23);
             btnCheckBalance.TabIndex = 2;
-            btnCheckBalance.Text = "button1";
+            btnCheckBalance.Text = "Баланс";
             btnCheckBalance.UseVisualStyleBackColor = true;
             btnCheckBalance.Click += btnCheckBalance_Click;
             // 
             // txtAmount
             // 
-            txtAmount.Location = new Point(24, 69);
+            txtAmount.Location = new Point(26, 93);
             txtAmount.Name = "txtAmount";
-            txtAmount.PasswordChar = '*';
-            txtAmount.Size = new Size(100, 23);
+            txtAmount.Size = new Size(153, 23);
             txtAmount.TabIndex = 1;
             // 
             // txtTargetCard
             // 
-            txtTargetCard.Location = new Point(24, 23);
+            txtTargetCard.Location = new Point(26, 46);
             txtTargetCard.Name = "txtTargetCard";
-            txtTargetCard.Size = new Size(100, 23);
+            txtTargetCard.Size = new Size(153, 23);
             txtTargetCard.TabIndex = 0;
             // 
             // MainForm
@@ -155,6 +221,7 @@
             Controls.Add(pnlLogin);
             Name = "MainForm";
             Text = "Form1";
+            Load += MainForm_Load;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
             pnlOperations.ResumeLayout(false);
@@ -175,5 +242,11 @@
         private Button btnCheckBalance;
         private TextBox txtAmount;
         private TextBox txtTargetCard;
+        private Label label2;
+        private Label label1;
+        private Label label4;
+        private Label label3;
+        private Button btnUpdateHistory;
+        private ListBox lstTransactions;
     }
 }

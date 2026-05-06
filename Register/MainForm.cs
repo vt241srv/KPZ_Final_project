@@ -6,7 +6,8 @@ namespace Register
     public partial class MainForm : Form
     {
         private AutomatedTellerMachine _atm;
-
+        private IAccountRepository _repository;
+        private string _currentCardNumber;
         public MainForm()
         {
             InitializeComponent();
@@ -16,8 +17,8 @@ namespace Register
         private void InitializeAtmLogic()
         {
 
-            var repository = new JsonAccountRepository("accounts.json");
-            _atm = new AutomatedTellerMachine(repository);
+            _repository = new JsonAccountRepository("accounts.json");
+            _atm = new AutomatedTellerMachine(_repository);
 
             _atm.OnAuthenticationResult += HandleAuthResult;
             _atm.OnBalanceRequested += HandleBalanceRequested;
@@ -51,7 +52,7 @@ namespace Register
             if (isSuccess)
             {
                 MessageBox.Show(message, "Переказ успішний", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               _atm.RequestBalance();
+                _atm.RequestBalance();
                 txtTargetCard.Clear();
                 txtAmount.Clear();
             }
@@ -64,6 +65,7 @@ namespace Register
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            _currentCardNumber = txtCardNumber.Text;
             _atm.Authenticate(txtCardNumber.Text, txtPin.Text);
         }
 
@@ -95,5 +97,29 @@ namespace Register
             lblBalance.Text = "Ваш баланс: 0 грн";
         }
 
+        private void btnUpdateHistory_Click(object sender, EventArgs e)
+        {
+            LoadTransactionHistory();
+        }
+
+        private void LoadTransactionHistory()
+        {
+            lstTransactions.Items.Clear();
+
+            var account = _repository.GetAccountByCardNumber(_currentCardNumber);
+
+            if (account != null && account.Transactions != null)
+            {
+                for (int i = account.Transactions.Count - 1; i >= 0; i--)
+                {
+                    lstTransactions.Items.Add(account.Transactions[i].ToString());
+                }
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
