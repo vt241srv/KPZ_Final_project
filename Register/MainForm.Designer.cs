@@ -124,7 +124,7 @@
             pnlOperations.Controls.Add(btnCheckBalance);
             pnlOperations.Controls.Add(txtAmount);
             pnlOperations.Controls.Add(txtTargetCard);
-            pnlOperations.Location = new Point(240, 52);
+            pnlOperations.Location = new Point(56, 23);
             pnlOperations.Name = "pnlOperations";
             pnlOperations.Size = new Size(450, 368);
             pnlOperations.TabIndex = 3;
@@ -260,7 +260,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(567, 450);
             Controls.Add(pnlOperations);
             Controls.Add(pnlLogin);
             Name = "MainForm";
