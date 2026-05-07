@@ -49,8 +49,21 @@
             btnCheckBalance = new Button();
             txtAmount = new TextBox();
             txtTargetCard = new TextBox();
+            pnlAdmin = new Panel();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            btnAdminLogout = new Button();
+            btnReplenish = new Button();
+            txtAdd50 = new TextBox();
+            txtAdd100 = new TextBox();
+            txtAdd200 = new TextBox();
+            txtAdd500 = new TextBox();
+            lblVaultStatus = new Label();
             pnlLogin.SuspendLayout();
             pnlOperations.SuspendLayout();
+            pnlAdmin.SuspendLayout();
             SuspendLayout();
             // 
             // pnlLogin
@@ -124,7 +137,7 @@
             pnlOperations.Controls.Add(btnCheckBalance);
             pnlOperations.Controls.Add(txtAmount);
             pnlOperations.Controls.Add(txtTargetCard);
-            pnlOperations.Location = new Point(56, 23);
+            pnlOperations.Location = new Point(230, 12);
             pnlOperations.Name = "pnlOperations";
             pnlOperations.Size = new Size(450, 368);
             pnlOperations.TabIndex = 3;
@@ -256,11 +269,124 @@
             txtTargetCard.Size = new Size(153, 23);
             txtTargetCard.TabIndex = 0;
             // 
+            // pnlAdmin
+            // 
+            pnlAdmin.Controls.Add(label9);
+            pnlAdmin.Controls.Add(label8);
+            pnlAdmin.Controls.Add(label7);
+            pnlAdmin.Controls.Add(label6);
+            pnlAdmin.Controls.Add(btnAdminLogout);
+            pnlAdmin.Controls.Add(btnReplenish);
+            pnlAdmin.Controls.Add(txtAdd50);
+            pnlAdmin.Controls.Add(txtAdd100);
+            pnlAdmin.Controls.Add(txtAdd200);
+            pnlAdmin.Controls.Add(txtAdd500);
+            pnlAdmin.Controls.Add(lblVaultStatus);
+            pnlAdmin.Location = new Point(156, 24);
+            pnlAdmin.Name = "pnlAdmin";
+            pnlAdmin.Size = new Size(521, 381);
+            pnlAdmin.TabIndex = 4;
+            pnlAdmin.Visible = false;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(13, 202);
+            label9.Name = "label9";
+            label9.Size = new Size(127, 15);
+            label9.TabIndex = 15;
+            label9.Text = "Кількість купюр по 50";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(13, 173);
+            label8.Name = "label8";
+            label8.Size = new Size(133, 15);
+            label8.TabIndex = 14;
+            label8.Text = "Кількість купюр по 100";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(13, 137);
+            label7.Name = "label7";
+            label7.Size = new Size(133, 15);
+            label7.TabIndex = 13;
+            label7.Text = "Кількість купюр по 200";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(13, 100);
+            label6.Name = "label6";
+            label6.Size = new Size(133, 15);
+            label6.TabIndex = 12;
+            label6.Text = "Кількість купюр по 500";
+            // 
+            // btnAdminLogout
+            // 
+            btnAdminLogout.Location = new Point(113, 267);
+            btnAdminLogout.Name = "btnAdminLogout";
+            btnAdminLogout.Size = new Size(172, 23);
+            btnAdminLogout.TabIndex = 11;
+            btnAdminLogout.Text = "Вийти з режиму Адміна";
+            btnAdminLogout.UseVisualStyleBackColor = true;
+            btnAdminLogout.Click += btnAdminLogout_Click;
+            // 
+            // btnReplenish
+            // 
+            btnReplenish.Location = new Point(124, 238);
+            btnReplenish.Name = "btnReplenish";
+            btnReplenish.Size = new Size(145, 23);
+            btnReplenish.TabIndex = 10;
+            btnReplenish.Text = "Поповнити банкомат";
+            btnReplenish.UseVisualStyleBackColor = true;
+            btnReplenish.Click += btnReplenish_Click;
+            // 
+            // txtAdd50
+            // 
+            txtAdd50.Location = new Point(148, 199);
+            txtAdd50.Name = "txtAdd50";
+            txtAdd50.Size = new Size(100, 23);
+            txtAdd50.TabIndex = 9;
+            // 
+            // txtAdd100
+            // 
+            txtAdd100.Location = new Point(148, 168);
+            txtAdd100.Name = "txtAdd100";
+            txtAdd100.Size = new Size(100, 23);
+            txtAdd100.TabIndex = 8;
+            // 
+            // txtAdd200
+            // 
+            txtAdd200.Location = new Point(148, 134);
+            txtAdd200.Name = "txtAdd200";
+            txtAdd200.Size = new Size(100, 23);
+            txtAdd200.TabIndex = 7;
+            // 
+            // txtAdd500
+            // 
+            txtAdd500.Location = new Point(148, 97);
+            txtAdd500.Name = "txtAdd500";
+            txtAdd500.Size = new Size(100, 23);
+            txtAdd500.TabIndex = 6;
+            // 
+            // lblVaultStatus
+            // 
+            lblVaultStatus.AutoSize = true;
+            lblVaultStatus.Location = new Point(317, 97);
+            lblVaultStatus.Name = "lblVaultStatus";
+            lblVaultStatus.Size = new Size(38, 15);
+            lblVaultStatus.TabIndex = 5;
+            lblVaultStatus.Text = "label6";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(567, 450);
+            ClientSize = new Size(793, 450);
+            Controls.Add(pnlAdmin);
             Controls.Add(pnlOperations);
             Controls.Add(pnlLogin);
             Name = "MainForm";
@@ -270,6 +396,8 @@
             pnlLogin.PerformLayout();
             pnlOperations.ResumeLayout(false);
             pnlOperations.PerformLayout();
+            pnlAdmin.ResumeLayout(false);
+            pnlAdmin.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -296,5 +424,17 @@
         private Label label5;
         private CheckBox chkSmallBills;
         private TextBox txtWithdrawAmount;
+        private Panel pnlAdmin;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Button btnAdminLogout;
+        private Button btnReplenish;
+        private TextBox txtAdd50;
+        private TextBox txtAdd100;
+        private TextBox txtAdd200;
+        private TextBox txtAdd500;
+        private Label lblVaultStatus;
     }
 }

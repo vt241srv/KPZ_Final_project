@@ -7,60 +7,86 @@ namespace Register.Core
 
     public interface IDispenseStrategy
     {
-        string Dispense(decimal amount);
+        DispenseResult Dispense(decimal amount, Models.AtmVault vault);
+    }
+
+    public class DispenseResult
+    {
+        public bool IsPossible { get; set; }
+        public string Message { get; set; }
+        public Dictionary<int, int> Bills { get; set; } = new Dictionary<int, int>();
     }
 
     public abstract class BaseDispenseStrategy : IDispenseStrategy
     {
-        public abstract string Dispense(decimal amount);
+        public abstract DispenseResult Dispense(decimal amount, Models.AtmVault vault);
 
-        protected string CalculateBills(decimal amount, int[] denominations)
+        protected DispenseResult CalculateWithVaultCheck(decimal amount, int[] denominations, Models.AtmVault vault)
         {
             decimal remaining = amount;
-            var dispensed = new Dictionary<int, int>();
+            var result = new DispenseResult();
+
+            var vaultBills = new Dictionary<int, int> {
+                { 500, vault.Bills500 }, { 200, vault.Bills200 },
+                { 100, vault.Bills100 }, { 50, vault.Bills50 }
+            };
 
             foreach (int bill in denominations)
             {
                 if (remaining >= bill)
                 {
-                    int count = (int)(remaining / bill);
-                    dispensed.Add(bill, count);
-                    remaining -= count * bill; 
+                    int countNeeded = (int)(remaining / bill);
+                    int actualCount = Math.Min(countNeeded, vaultBills[bill]);
+
+                    if (actualCount > 0)
+                    {
+                        result.Bills.Add(bill, actualCount);
+                        remaining -= actualCount * bill;
+                    }
                 }
             }
 
-            if (remaining > 0) return null; 
-
-            var sb = new StringBuilder();
-            foreach (var kvp in dispensed)
+            if (remaining > 0)
             {
-                sb.AppendLine($"- {kvp.Value} шт. номіналом {kvp.Key} грн");
+                result.IsPossible = false;
+                result.Message = "У банкоматі недостатньо потрібних купюр для видачі цієї суми.";
+                return result;
             }
-            return sb.ToString();
+
+            result.IsPossible = true;
+            var sb = new StringBuilder();
+            foreach (var kvp in result.Bills) sb.AppendLine($"- {kvp.Value} шт. по {kvp.Key} грн");
+            result.Message = sb.ToString();
+
+            return result;
         }
     }
     public class DefaultDispenseStrategy : BaseDispenseStrategy
     {
-        public override string Dispense(decimal amount)
+        public override DispenseResult Dispense(decimal amount, Models.AtmVault vault)
         {
             int[] bills = { 500, 200, 100, 50 };
-            var result = CalculateBills(amount, bills);
+            var result = CalculateWithVaultCheck(amount, bills, vault);
 
-            return result != null
-                ? "Видано стандартними купюрами:\n" + result
-                : "Неможливо видати цю суму (мінімальна купюра 50 грн).";
+            if (result.IsPossible)
+            {
+                result.Message = "Видано стандартними купюрами:\n" + result.Message;
+            }
+            return result;
         }
     }
     public class SmallBillsDispenseStrategy : BaseDispenseStrategy
     {
-        public override string Dispense(decimal amount)
+        public override DispenseResult Dispense(decimal amount, Models.AtmVault vault)
         {
             int[] bills = { 100, 50 };
-            var result = CalculateBills(amount, bills);
+            var result = CalculateWithVaultCheck(amount, bills, vault);
 
-            return result != null
-                ? "Видано дрібними купюрами:\n" + result
-                : "Неможливо видати суму виключно дрібними купюрами.";
+            if (result.IsPossible)
+            {
+                result.Message = "Видано дрібними купюрами:\n" + result.Message;
+            }
+            return result;
         }
     }
 }
