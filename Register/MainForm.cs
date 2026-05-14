@@ -12,9 +12,12 @@ namespace Register
         public MainForm()
         {
             InitializeComponent();
+
+
+
             InitializeAtmLogic();
         }
-
+        
         private void InitializeAtmLogic()
         {
 
