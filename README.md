@@ -60,3 +60,14 @@
 * **Replace Magic Number with Symbolic Constant** (Заміна магічного числа символічною константою): Максимальна кількість спроб введення PIN-коду була винесена в константу private const int MAX_ATTEMPTS = 3; у класі AutomatedTellerMachine, щоб зробити код читабельним та легким для налаштування.
 
 * **Encapsulate Field** (Інкапсуляція поля): Усі моделі даних (Account, TransactionDetails) використовують властивості (get; set;) замість відкритих публічних полів, що захищає дані від некоректної модифікації ззовні.
+<img width="545" height="432" alt="image" src="https://github.com/user-attachments/assets/ba31b1b9-4b39-4ca4-9711-494775f5b3cd" />
+<img width="546" height="434" alt="image" src="https://github.com/user-attachments/assets/55c05cab-913b-4717-97eb-68c1190b18bc" />
+<img width="541" height="433" alt="image" src="https://github.com/user-attachments/assets/1b0ae4ea-9e5c-43b2-99b8-fab0710cac81" />
+<img width="546" height="437" alt="image" src="https://github.com/user-attachments/assets/1ea5b5fd-c070-4c10-b872-6f26682f8461" />
+<img width="537" height="430" alt="image" src="https://github.com/user-attachments/assets/445661e2-3040-4fb4-b770-c9d2f1602598" />
+<img width="726" height="425" alt="image" src="https://github.com/user-attachments/assets/e53ebeaf-eb70-416f-9779-e55a348a2993" />
+<img width="545" height="242" alt="image" src="https://github.com/user-attachments/assets/68de7c3b-d419-4f34-9826-bb8a16f84cf3" />
+<img width="582" height="412" alt="image" src="https://github.com/user-attachments/assets/596e6f9e-37bd-46f5-a826-27bddb776ec7" />
+<img width="574" height="408" alt="image" src="https://github.com/user-attachments/assets/639e6f58-6bda-43a0-b78b-6b5ccecd1a40" />
+
+
